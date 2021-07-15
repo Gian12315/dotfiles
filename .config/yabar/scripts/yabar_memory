@@ -1,0 +1,10 @@
+#! /bin/dash
+
+mem=$(free -h | awk '{print $3}' | sed '1 d ; 3 d ; s/[A-Z]/ &/')
+
+mem_num=$(free -m | awk '{print $3}' | sed '1 d ; 3 d')
+
+[ "$mem_num" -lt 1000 ] && echo "!Y BG 0xff388e3c U 0xff00600f Y! $mem" && exit;
+[ "$mem_num" -lt 2000 ] && echo "!Y BG 0xfffcc835 U 0xffc6a700 Y! $mem" && exit;
+[ "$mem_num" -lt 3000 ] && echo "!Y BG 0xffffa000  u0xffc67100 Y! $mem" && exit;
+echo "!Y BG 0xffd32f2f U 0xffffffff Y! $mem" && exit;

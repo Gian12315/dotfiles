@@ -1,0 +1,5 @@
+allow_images=true
+term=alacritty
+prompt=
+insensitive=true
+image_size=26

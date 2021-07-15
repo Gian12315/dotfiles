@@ -1,0 +1,267 @@
+" Plugins will be downloaded under the specified directory.
+call plug#begin(stdpath('data') . '/plugged')
+" Change whatever is surrounding your selection
+Plug 'tpope/vim-surround'
+Plug 'tpope/vim-repeat'
+Plug 'tpope/vim-commentary'
+Plug 'tpope/vim-abolish'
+
+Plug 'justinmk/vim-dirvish'
+
+Plug 'vimwiki/vimwiki'
+Plug 'mattn/calendar-vim'
+
+" Unicode insertion
+Plug 'chrisbra/unicode.vim'
+
+" Status line
+Plug 'itchyny/lightline.vim'
+
+" Nord colorscheme
+Plug 'arcticicestudio/nord-vim'
+
+Plug 'dracula/vim'
+
+" Colorizer
+Plug 'norcalli/nvim-colorizer.lua'
+
+" Track the engine.
+Plug 'SirVer/ultisnips'
+
+" Snippets are separated from the engine. Add this if you want them:
+Plug 'honza/vim-snippets'
+
+Plug 'steelsojka/completion-buffers'
+Plug 'nvim-lua/completion-nvim'
+
+" Extensions to built-in LSP, for example, providing type inlay hints
+Plug 'tjdevries/lsp_extensions.nvim'
+
+Plug '~/GitHub/nvim-lspconfig'
+
+Plug 'junegunn/fzf'
+
+" More targets!
+Plug 'wellle/targets.vim'
+call plug#end()
+
+
+let g:nord_italic = 1
+let g:nord_italic_comments = 1
+let g:nord_underline = 1
+colorscheme dracula
+let g:lightline = {
+      \ 'colorscheme': 'nord',
+      \ }
+
+" let g:lightline.separator = {
+" 	\   'left': '', 'right': ''
+"   \}
+" let g:lightline.subseparator = {
+" 	\   'left': '', 'right': '' 
+"   \}
+
+" Mapping leader to space
+let mapleader = " "
+
+" Movements
+nnoremap <C-e> 3<C-e>
+nnoremap <C-y> 3<C-y>
+
+set number relativenumber
+
+set noshowmode
+
+set foldmethod=indent
+
+set hidden
+
+" Better command-line completion
+set wildmenu
+
+" Show partial commands in the last line of the screen
+set showcmd
+
+" Highlight searches (use <C-L> to temporarily turn off highlighting; see the
+" mapping of <C-L> below)
+set hlsearch
+
+set modeline
+set modelines=5
+
+filetype indent plugin on
+syntax on
+
+" Indetantion settings
+set shiftwidth=4
+set softtabstop=4
+set expandtab
+
+let g:tex_conceal='abdmg'
+set conceallevel=1
+let g:concealcursor="nc"
+set signcolumn=yes
+
+" Mappings
+" Map Y to yy
+map Y y$
+
+" Map <C-L> to turn off search highlighting
+nnoremap <C-L> :nohl<CR><C-L>
+
+" Spell checker
+nnoremap <silent> <C-s> :set spell!<cr>
+set spelllang=es,cjk
+
+" For conceal markers.
+if has('conceal')
+  set conceallevel=2 concealcursor=niv
+endif
+
+if empty(v:servername) && exists('*remote_startserver')
+  call remote_startserver('VIM')
+endif
+
+" Language Servers Custom Options
+lua <<EOF
+local lspconfig = require'lspconfig'
+
+-- Enable rust_analyzer
+lspconfig.rust_analyzer.setup{}
+
+-- Jdtls
+-- lspconfig.jdtls.setup{}
+
+-- Tex
+lspconfig.texlab.setup{
+    settings = {
+        latex = {
+            build = {
+                args = { "-cd", "-e", "-f", "-pdf", "-interaction=nonstopmode", "-synctex=1", "-outdir=out", "-latexoption='--shell-escape'", "-lualatex", "%f" };
+                outputDirectory = "out";
+                onSave = true;
+                executable = "latexmk";
+            },
+            forwardSearch = {
+                executable = "zathura";
+                args = { "--synctex-forward", "%l:1:%f", "%p" };
+            }
+        },
+        bibtex = {
+            formatting = {
+                formatter = "latexindent";
+            }
+        }
+    }
+}
+EOF
+ let g:completion_chain_complete_list = {
+    \ 'rust': {
+    \   'rustModPathSep': [
+    \        {'complete_items': ['lsp']}],
+    \    'default': [
+    \       {'complete_items': ['lsp', 'snippet']},
+    \       {'mode': '<c-p>'},
+    \       {'mode': '<c-n>'}],
+    \},
+    \ 'default' : {
+    \   'default': [
+    \       {'complete_items': ['lsp', 'snippet']},
+    \       {'mode': '<c-p>'},
+    \       {'mode': '<c-n>'}],
+    \   }
+    \}
+" Use completion-nvim in every buffer
+autocmd BufEnter * lua require'completion'.on_attach()
+
+" Set completeopt to have a better completion experience
+set completeopt=menuone,noinsert,noselect
+
+" Avoid showing message extra message when using completion
+set shortmess+=c
+
+" possible value: 'UltiSnips', 'Neosnippet', 'vim-vsnip', 'snippets.nvim'
+let g:completion_enable_snippet = 'UltiSnips'
+
+let g:completion_auto_change_source = 1
+let g:completion_enable_auto_paren = 1
+
+" UltiSnips
+let g:UltiSnipsExpandTrigger="<cr>"
+
+" Use <Tab> and <S-Tab> to navigate through popup menu
+inoremap <expr> <Tab>   pumvisible() ? "\<C-n>" : "\<Tab>"
+inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+
+function! s:check_back_space() abort
+    let col = col('.') - 1
+    return !col || getline('.')[col - 1]  =~ '\s'
+endfunction
+
+
+" Code navigation shortcuts
+nnoremap <silent> <c-]> <cmd>lua vim.lsp.buf.definition()<CR>
+nnoremap <silent> K     <cmd>lua vim.lsp.buf.hover()<CR>
+nnoremap <silent> gD    <cmd>lua vim.lsp.buf.implementation()<CR>
+nnoremap <silent> 1gD   <cmd>lua vim.lsp.buf.type_definition()<CR>
+nnoremap <silent> gr    <cmd>lua vim.lsp.buf.references()<CR>
+nnoremap <silent> g0    <cmd>lua vim.lsp.buf.document_symbol()<CR>
+nnoremap <silent> gW    <cmd>lua vim.lsp.buf.workspace_symbol()<CR>
+nnoremap <silent> gd    <cmd>lua vim.lsp.buf.declaration()<CR>
+
+nnoremap <silent> ga    <cmd>lua vim.lsp.buf.code_action()<CR>
+
+" Visualize diagnostics
+let g:diagnostic_enable_virtual_text = 1
+let g:diagnostic_trimmed_virtual_text = '40'
+" Don't show diagnostics while in insert mode
+let g:diagnostic_insert_delay = 1
+
+" Goto previous/next diagnostic warning/error
+nnoremap <silent> g[ <cmd>vim.lsp.diagnostic.goto_prev()<cr>
+nnoremap <silent> g] <cmd>vim.lsp.diagnostic.goto_next()<cr>
+
+" Enable type inlay hints
+autocmd CursorMoved,InsertLeave,BufEnter,BufWinEnter,TabEnter,BufWritePost *
+\ lua require'lsp_extensions'.inlay_hints{ prefix = '', highlight = "Comment" }
+
+augroup LaTeX
+    autocmd BufEnter *.tex,*.bib| let g:completion_enable_auto_paren=0 
+    autocmd FileType tex nnoremap <silent> gp <cmd>lua preview()<CR>
+    autocmd FileType tex nnoremap <silent> gf <cmd>TexlabForward<CR>
+    autocmd FileType tex nnoremap <silent> gb <cmd>lua RunBiber()<CR>
+augroup end
+
+lua << EOF
+function preview()
+    local folder = vim.fn.expand("%:p:h")
+    local name = vim.fn.expand("%:t:r")
+    local pdf_path = folder.."/out/"..name..".pdf"
+    os.execute("zathura "..pdf_path.." &")
+end
+
+function RunBiber()
+    local name = vim.fn.expand("%:t:r")
+    os.execute("biber --input-directory ./out "..name.." > /dev/null &")
+end
+EOF
+
+lua << EOF
+vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
+  vim.lsp.diagnostic.on_publish_diagnostics, {
+    virtual_text = true,
+    signs = true,
+    update_in_insert = false,
+  }
+)
+EOF
+ " Auto-format *.rs (rust) files prior to saving them
+ autocmd BufWritePre *.rs lua vim.lsp.buf.formatting_sync(nil, 1000)
+
+ autocmd BufWritePre *.tex,*.bib lua vim.lsp.buf.formatting_sync(nil, 1000)
+
+
+ autocmd BufWritePre *.java lua vim.lsp.buf.formatting_sync(nil, 1000)
+
+" set termguicolors
+" lua require'colorizer'.setup()

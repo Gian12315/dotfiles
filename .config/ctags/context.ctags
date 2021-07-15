@@ -1,0 +1,8 @@
+--langdef=context
+--regex-context=/^[[:space:]]*\\startsection[[:space:]]*\[[^]]*title[[:space:]]*=[[:space:]]*\{[[:space:]]*(.+)\}/\. \1/s,section/
+--regex-context=/^[[:space:]]*\\startsubsection[[:space:]]*\[[^]]*title[[:space:]]*=[[:space:]]*\{[[:space:]]*(.+)\}/\.\. \1/s,subsection/
+--regex-context=/^[[:space:]]*\\startsubsubsection[[:space:]]*\[[^]]*title[[:space:]]*=[[:space:]]*\{[[:space:]]*(.+)\}/\.\.\. \1/s,subsubsection/
+--regex-context=/^[[:space:]]*\\startchapter[[:space:]]*\[[^]]*title[[:space:]]*=[[:space:]]*\{[[:space:]]*(.+)\}/\1/c,chapter/
+--regex-context=/^[[:space:]]*\\startsubject[[:space:]]*\[[^]]*title[[:space:]]*=[[:space:]]*\{[[:space:]]*(.+)\}/SUBJ \1/c,subject/
+--regex-context=/^[[:space:]]*\\startsubsubject[[:space:]]*\[[^]]*title[[:space:]]*=[[:space:]]*\{[[:space:]]*(.+)\}/SUBSUBJ \1/c,subsubject/
+--regex-context=/^[[:space:]]*\\startpart[[:space:]]*\[[^]]*title[[:space:]]*=[[:space:]]*\{[[:space:]]*(.+)\}/\1/p,part/

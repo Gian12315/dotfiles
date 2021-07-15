@@ -1,0 +1,8 @@
+font="SauceCodePro Nerd Font 8"
+background-color=#3B4252
+text-color=#ECEFF4
+border-size=5
+border-color=#2E3440
+border-radius=3
+default-timeout=10000
+icon-path="/usr/share/icons/Arc/status/16/:/usr/share/icons/Arc/devices/16/"
