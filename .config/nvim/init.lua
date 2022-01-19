@@ -9,9 +9,9 @@ if fn.empty(fn.glob(install_path)) > 0 then
   execute 'packadd packer.nvim'
 end
 
-require('maps')
-require('settings')
 require('plugins')
+require('settings')
+require('maps')
 
 vim.lsp.set_log_level("debug")
 
@@ -41,14 +41,3 @@ require'nvim-treesitter.configs'.setup {
 	incremental_selection = {enable = true},
 	indent = {enable = true}
 }
-
-
-function compileAndRunVB()
-    local folder = vim.fn.expand("%:p:h")
-    local file = vim.fn.expand("%")
-    local name = vim.fn.expand("%:t:r")
-    os.execute("vbnc " .. file .. "&& mono " .. folder .. "/" .. name .. ".exe")
-    -- code
-end
-
-vim.api.nvim_set_keymap('n', '<leader>r', '<cmd>lua compileAndRunVB()<cr>', {silent = true, noremap = true})

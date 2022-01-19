@@ -2,12 +2,82 @@ return require('packer').startup(function()
   -- Packer can manage itself
     use 'wbthomason/packer.nvim'
 
-    use {'hrsh7th/nvim-compe', config = [[require('config.nvim-compe')]]}
+    -- Snippets
+    use {'hrsh7th/vim-vsnip', 
+        config = [[require('config.vsnip')]],
+        requires = {
+            'hrsh7th/vim-vsnip-integ', 
+            {'rafamadriz/friendly-snippets', opt=true}
+        }
+    }
+
+    use {'hrsh7th/nvim-cmp', 
+        config = [[require('config.nvim-cmp')]],
+        requires = {
+            {'hrsh7th/cmp-nvim-lsp'},
+            {'f3fora/cmp-spell'},
+            {'hrsh7th/cmp-buffer'},
+            {'hrsh7th/cmp-calc'},
+            {'hrsh7th/cmp-path'},
+            {'hrsh7th/cmp-vsnip'},
+            {'ray-x/cmp-treesitter'}
+        }
+    }
 
     -- Language server protocol
     use {'neovim/nvim-lspconfig', config = [[require("config.lspconfig")]]}
 
     use {'tjdevries/lsp_extensions.nvim', config = [[require("config.lsp_extensions")]]}
+
+    -- Icons for my lsp completions
+    use {'onsails/lspkind-nvim', opt=true,
+        config = function()
+            require('lspkind').init({
+                -- enables text annotations
+                --
+                -- default: true
+                with_text = true,
+
+                -- default symbol map
+                -- can be either 'default' (requires nerd-fonts font) or
+                -- 'codicons' for codicon preset (requires vscode-codicons font)
+                --
+                -- default: 'default'
+                preset = 'default',
+
+                -- override preset symbols
+                --
+                -- default: {}
+                symbol_map = {
+                  Text = "",
+                  Method = "",
+                  Function = "",
+                  Constructor = "",
+                  Field = "ﰠ",
+                  Variable = "",
+                  Class = "ﴯ",
+                  Interface = "",
+                  Module = "",
+                  Property = "ﰠ",
+                  Unit = "塞",
+                  Value = "",
+                  Enum = "",
+                  Keyword = "",
+                  Snippet = "",
+                  Color = "",
+                  File = "",
+                  Reference = "",
+                  Folder = "",
+                  EnumMember = "",
+                  Constant = "",
+                  Struct = "פּ",
+                  Event = "",
+                  Operator = "",
+                  TypeParameter = ""
+                },
+            })
+                    end
+    }
 
     use {'glepnir/lspsaga.nvim', config = [[require("config.lspsaga")]]}
 
@@ -15,14 +85,16 @@ return require('packer').startup(function()
 
     use {'norcalli/nvim-colorizer.lua', config = [[require("config.colorizer")]]}
 
-    use {
-        'folke/which-key.nvim',
+    use {'folke/which-key.nvim',
         config = [[require('config.which-key')]]
     }
 
     use {
         'nvim-telescope/telescope.nvim',
-        requires = {{'nvim-lua/popup.nvim'}, {'nvim-lua/plenary.nvim'}},
+        requires = {
+            {'nvim-lua/popup.nvim'},
+            {'nvim-lua/plenary.nvim'}
+        },
         config = [[require("config.telescope")]]
     }
 
@@ -58,24 +130,19 @@ return require('packer').startup(function()
         config = [[require('config.feline')]]
         }
 
-    -- Snippets
-    use {'hrsh7th/vim-vsnip', 
-        config = [[require('config.vsnip')]],
-        requires = {
-            'hrsh7th/vim-vsnip-integ', 
-            {'rafamadriz/friendly-snippets', opt=true}
-        }
-    }
+    use {'kyazdani42/nvim-tree.lua', requires = {'kyazdani42/nvim-web-devicons'}}
 
     -- Treesitter
-    use {'nvim-treesitter/nvim-treesitter', run = ':call firenvim#install(0)'}
+    use 'nvim-treesitter/nvim-treesitter'
 
     -- Extra languages
     use 'leafo/moonscript-vim'
 
-    use {'glacambre/firenvim', run = ''}
+    -- Misc
+    use 'andweeb/presence.nvim'
 
-    -- You can alias plugin names
+    -- Colorschemes
     use {'dracula/vim', as = 'dracula'}
+    use {'mountain-theme/Mountain', rtp = 'vim'}
 end)
 

@@ -45,6 +45,5 @@ opt.wildmenu = true
 -- gui cursor
 
 
-cmd("colorscheme dracula")
-
+cmd("autocmd VimEnter * colorscheme mountain")
 cmd("autocmd BufWritePost plugins.lua PackerCompile")

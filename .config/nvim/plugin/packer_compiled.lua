@@ -69,6 +69,38 @@ end
 time([[try_loadstring definition]], false)
 time([[Defining packer_plugins]], true)
 _G.packer_plugins = {
+  Mountain = {
+    loaded = true,
+    path = "/home/giancarlo/.local/share/nvim/site/pack/packer/start/Mountain/vim"
+  },
+  ["cmp-buffer"] = {
+    loaded = true,
+    path = "/home/giancarlo/.local/share/nvim/site/pack/packer/start/cmp-buffer"
+  },
+  ["cmp-calc"] = {
+    loaded = true,
+    path = "/home/giancarlo/.local/share/nvim/site/pack/packer/start/cmp-calc"
+  },
+  ["cmp-nvim-lsp"] = {
+    loaded = true,
+    path = "/home/giancarlo/.local/share/nvim/site/pack/packer/start/cmp-nvim-lsp"
+  },
+  ["cmp-path"] = {
+    loaded = true,
+    path = "/home/giancarlo/.local/share/nvim/site/pack/packer/start/cmp-path"
+  },
+  ["cmp-spell"] = {
+    loaded = true,
+    path = "/home/giancarlo/.local/share/nvim/site/pack/packer/start/cmp-spell"
+  },
+  ["cmp-treesitter"] = {
+    loaded = true,
+    path = "/home/giancarlo/.local/share/nvim/site/pack/packer/start/cmp-treesitter"
+  },
+  ["cmp-vsnip"] = {
+    loaded = true,
+    path = "/home/giancarlo/.local/share/nvim/site/pack/packer/start/cmp-vsnip"
+  },
   ["dashboard-nvim"] = {
     config = { 'require("config.dashboard-nvim")' },
     loaded = true,
@@ -82,10 +114,6 @@ _G.packer_plugins = {
     config = { "require('config.feline')" },
     loaded = true,
     path = "/home/giancarlo/.local/share/nvim/site/pack/packer/start/feline.nvim"
-  },
-  firenvim = {
-    loaded = true,
-    path = "/home/giancarlo/.local/share/nvim/site/pack/packer/start/firenvim"
   },
   ["friendly-snippets"] = {
     loaded = false,
@@ -102,6 +130,12 @@ _G.packer_plugins = {
     loaded = true,
     path = "/home/giancarlo/.local/share/nvim/site/pack/packer/start/lsp_extensions.nvim"
   },
+  ["lspkind-nvim"] = {
+    config = { "\27LJ\1\2�\3\0\0\3\0\6\0\t4\0\0\0%\1\1\0>\0\2\0027\0\2\0003\1\3\0003\2\4\0:\2\5\1>\0\2\1G\0\1\0\15symbol_map\1\0\25\tText\b\rFunction\b\rOperator\b\nColor\b\nClass\bﴯ\vModule\b\rConstant\b\rProperty\bﰠ\vMethod\b\15EnumMember\b\tUnit\b塞\14Interface\b\vStruct\bפּ\rVariable\b\fSnippet\b\vFolder\b\nEvent\b\nField\bﰠ\18TypeParameter\5\tFile\b\nValue\b\16Constructor\b\tEnum\b\fKeyword\b\14Reference\b\1\0\2\vpreset\rcodicons\14with_text\2\tinit\flspkind\frequire\0" },
+    loaded = false,
+    needs_bufread = false,
+    path = "/home/giancarlo/.local/share/nvim/site/pack/packer/opt/lspkind-nvim"
+  },
   ["lspsaga.nvim"] = {
     config = { 'require("config.lspsaga")' },
     loaded = true,
@@ -116,20 +150,24 @@ _G.packer_plugins = {
     loaded = true,
     path = "/home/giancarlo/.local/share/nvim/site/pack/packer/start/nvim-autopairs"
   },
+  ["nvim-cmp"] = {
+    config = { "require('config.nvim-cmp')" },
+    loaded = true,
+    path = "/home/giancarlo/.local/share/nvim/site/pack/packer/start/nvim-cmp"
+  },
   ["nvim-colorizer.lua"] = {
     config = { 'require("config.colorizer")' },
     loaded = true,
     path = "/home/giancarlo/.local/share/nvim/site/pack/packer/start/nvim-colorizer.lua"
   },
-  ["nvim-compe"] = {
-    config = { "require('config.nvim-compe')" },
-    loaded = true,
-    path = "/home/giancarlo/.local/share/nvim/site/pack/packer/start/nvim-compe"
-  },
   ["nvim-lspconfig"] = {
     config = { 'require("config.lspconfig")' },
     loaded = true,
     path = "/home/giancarlo/.local/share/nvim/site/pack/packer/start/nvim-lspconfig"
+  },
+  ["nvim-tree.lua"] = {
+    loaded = true,
+    path = "/home/giancarlo/.local/share/nvim/site/pack/packer/start/nvim-tree.lua"
   },
   ["nvim-treesitter"] = {
     loaded = true,
@@ -150,6 +188,10 @@ _G.packer_plugins = {
   ["popup.nvim"] = {
     loaded = true,
     path = "/home/giancarlo/.local/share/nvim/site/pack/packer/start/popup.nvim"
+  },
+  ["presence.nvim"] = {
+    loaded = true,
+    path = "/home/giancarlo/.local/share/nvim/site/pack/packer/start/presence.nvim"
   },
   tagbar = {
     config = { "\27LJ\1\2\\\0\0\5\0\6\0\t4\0\0\0007\0\1\0007\0\2\0%\1\3\0%\2\4\0%\3\5\0002\4\0\0>\0\5\1G\0\1\0\22:TagbarToggle<cr>\t<F8>\6n\20nvim_set_keymap\bapi\bvim\0" },
@@ -194,34 +236,38 @@ _G.packer_plugins = {
 }
 
 time([[Defining packer_plugins]], false)
--- Config for: telescope.nvim
-time([[Config for telescope.nvim]], true)
-require("config.telescope")
-time([[Config for telescope.nvim]], false)
--- Config for: nvim-colorizer.lua
-time([[Config for nvim-colorizer.lua]], true)
-require("config.colorizer")
-time([[Config for nvim-colorizer.lua]], false)
--- Config for: tagbar
-time([[Config for tagbar]], true)
-try_loadstring("\27LJ\1\2\\\0\0\5\0\6\0\t4\0\0\0007\0\1\0007\0\2\0%\1\3\0%\2\4\0%\3\5\0002\4\0\0>\0\5\1G\0\1\0\22:TagbarToggle<cr>\t<F8>\6n\20nvim_set_keymap\bapi\bvim\0", "config", "tagbar")
-time([[Config for tagbar]], false)
--- Config for: nvim-compe
-time([[Config for nvim-compe]], true)
-require('config.nvim-compe')
-time([[Config for nvim-compe]], false)
+-- Runtimepath customization
+time([[Runtimepath customization]], true)
+vim.o.runtimepath = vim.o.runtimepath .. ",/home/giancarlo/.local/share/nvim/site/pack/packer/start/Mountain/vim"
+time([[Runtimepath customization]], false)
+-- Config for: nvim-lspconfig
+time([[Config for nvim-lspconfig]], true)
+require("config.lspconfig")
+time([[Config for nvim-lspconfig]], false)
+-- Config for: nvim-cmp
+time([[Config for nvim-cmp]], true)
+require('config.nvim-cmp')
+time([[Config for nvim-cmp]], false)
 -- Config for: which-key.nvim
 time([[Config for which-key.nvim]], true)
 require('config.which-key')
 time([[Config for which-key.nvim]], false)
--- Config for: vim-vsnip
-time([[Config for vim-vsnip]], true)
-require('config.vsnip')
-time([[Config for vim-vsnip]], false)
+-- Config for: tagbar
+time([[Config for tagbar]], true)
+try_loadstring("\27LJ\1\2\\\0\0\5\0\6\0\t4\0\0\0007\0\1\0007\0\2\0%\1\3\0%\2\4\0%\3\5\0002\4\0\0>\0\5\1G\0\1\0\22:TagbarToggle<cr>\t<F8>\6n\20nvim_set_keymap\bapi\bvim\0", "config", "tagbar")
+time([[Config for tagbar]], false)
 -- Config for: dashboard-nvim
 time([[Config for dashboard-nvim]], true)
 require("config.dashboard-nvim")
 time([[Config for dashboard-nvim]], false)
+-- Config for: vim-vsnip
+time([[Config for vim-vsnip]], true)
+require('config.vsnip')
+time([[Config for vim-vsnip]], false)
+-- Config for: nvim-colorizer.lua
+time([[Config for nvim-colorizer.lua]], true)
+require("config.colorizer")
+time([[Config for nvim-colorizer.lua]], false)
 -- Config for: gitsigns.nvim
 time([[Config for gitsigns.nvim]], true)
 require("config.gitsigns")
@@ -242,10 +288,10 @@ time([[Config for feline.nvim]], false)
 time([[Config for nvim-autopairs]], true)
 require("config.nvim-autopairs")
 time([[Config for nvim-autopairs]], false)
--- Config for: nvim-lspconfig
-time([[Config for nvim-lspconfig]], true)
-require("config.lspconfig")
-time([[Config for nvim-lspconfig]], false)
+-- Config for: telescope.nvim
+time([[Config for telescope.nvim]], true)
+require("config.telescope")
+time([[Config for telescope.nvim]], false)
 if should_profile then save_profiles() end
 
 end)

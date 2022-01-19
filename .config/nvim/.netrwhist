@@ -1,0 +1,12 @@
+let g:netrw_dirhistmax  =10
+let g:netrw_dirhistcnt =7
+let g:netrw_dirhist_7='/home/giancarlo/Documentos/latex'
+let g:netrw_dirhist_6='/home/giancarlo'
+let g:netrw_dirhist_5='/home/giancarlo/vimwiki/diary'
+let g:netrw_dirhist_4='/home/giancarlo/vimwiki'
+let g:netrw_dirhist_3='/home/giancarlo/vimwiki/diary'
+let g:netrw_dirhist_2='/home/giancarlo/Rust_Projects/tests/src'
+let g:netrw_dirhist_1='/home/giancarlo/Rust_Projects/tests'
+let g:netrw_dirhist_0='/home/giancarlo/Rust_Projects/tests/src'
+let g:netrw_dirhist_9='/home/giancarlo/Rust_Projects/tests'
+let g:netrw_dirhist_8='/home/giancarlo/Rust_Projects/tests/src'
