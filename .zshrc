@@ -33,7 +33,7 @@ COMPLETION_WAITING_DOTS="true"
 # ZSH_CUSTOM=/path/to/new-custom-folder
 
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(cargo archlinux vi-mode safe-paste colorize zsh-syntax-highlighting zsh-autosuggestions history-substring-search)
+plugins=(rust archlinux vi-mode safe-paste colorize zsh-syntax-highlighting zsh-autosuggestions history-substring-search)
 
 source $ZSH/oh-my-zsh.sh
 
