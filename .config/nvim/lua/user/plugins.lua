@@ -2,7 +2,7 @@ local fn = vim.fn
 local install_path = fn.stdpath("data") .. "/site/pack/packer/start/packer.nvim"
 if fn.empty(fn.glob(install_path)) > 0 then
     PACKER_BOOTSTRAP =
-        fn.system({ "git", "clone", "--depth", "1", "https://github.com/wbthomason/packer.nvim", install_path })
+    fn.system({ "git", "clone", "--depth", "1", "https://github.com/wbthomason/packer.nvim", install_path })
     vim.cmd([[packadd packer.nvim]])
 end
 
@@ -16,7 +16,8 @@ vim.api.nvim_create_autocmd("BufWritePost", {
 
 -- Use a protected call so we don't error out on first use
 local status_ok, packer = pcall(require, "packer")
-if not status_ok then return
+if not status_ok then
+    return
 end
 
 packer.init({
@@ -36,7 +37,7 @@ return packer.startup(function(use)
         "nvim-treesitter/nvim-treesitter",
         run = ":TSUpdate",
         config = [[require('user.config.treesitter')]],
-        requires = {"RRethy/nvim-treesitter-textsubjects", {"windwp/nvim-ts-autotag"}}
+        requires = { "RRethy/nvim-treesitter-textsubjects", { "windwp/nvim-ts-autotag" } },
     })
 
     use({ "neovim/nvim-lspconfig", config = [[require('user.config.lsp')]] })
@@ -57,7 +58,7 @@ return packer.startup(function(use)
     -- LuaSnip and nvim-cmp are to be installed together.
     use({
         "L3MON4D3/LuaSnip",
-        requires = { { "saadparwaiz1/cmp_luasnip" }, { "rafamadriz/friendly-snippets", opt = true } },
+        requires = { { "rafamadriz/friendly-snippets", opt = true } },
     })
 
     use({
@@ -67,6 +68,7 @@ return packer.startup(function(use)
             { "onsails/lspkind.nvim" },
             { "hrsh7th/cmp-nvim-lsp" },
             { "hrsh7th/cmp-buffer" },
+            { "saadparwaiz1/cmp_luasnip" },
             { "hrsh7th/cmp-nvim-lua" },
             { "hrsh7th/cmp-calc" },
             { "hrsh7th/cmp-path" },
@@ -134,7 +136,7 @@ return packer.startup(function(use)
     })
     use({ "moll/vim-bbye" })
 
-use ({"karb94/neoscroll.nvim", config = [[require('user.config.neoscroll')]]})
+    use({ "karb94/neoscroll.nvim", config = [[require('user.config.neoscroll')]] })
 
     use({ "lukas-reineke/indent-blankline.nvim", config = [[require('user.config.indent-blankline')]] })
 
@@ -143,21 +145,40 @@ use ({"karb94/neoscroll.nvim", config = [[require('user.config.neoscroll')]]})
     use({ "ellisonleao/carbon-now.nvim", cmd = "CarbonNow", config = [[require("user.config.carbon")]] })
     use("andweeb/presence.nvim")
     use({ "max397574/better-escape.nvim", config = [[require("user.config.better-escape")]] })
+    use({ "RRethy/vim-illuminate" })
 
+    -- DAP
+    use({ "mfussenegger/nvim-dap", config = [[require("user.config.dap")]] })
+    use({ "rcarriga/nvim-dap-ui", config = [[require("user.config.dap.ui")]] })
 
     -- Zen
-    use ({"folke/twilight.nvim", config = [[require("user.config.twilight")]]})
-    use ({"Pocco81/true-zen.nvim", config = [[require('user.config.zen')]], cmd = {"TZAtaraxis", "TZMinimalist", "TZNarrow", "TZFocus"}})
+    use({ "folke/twilight.nvim", config = [[require("user.config.twilight")]] })
+    use({
+        "Pocco81/true-zen.nvim",
+        config = [[require('user.config.zen')]],
+        cmd = { "TZAtaraxis", "TZMinimalist", "TZNarrow", "TZFocus" },
+    })
 
-use {"iamcco/markdown-preview.nvim", run = function() vim.fn["mkdp#util#install"]() end,}
+    use({
+        "iamcco/markdown-preview.nvim",
+        run = function()
+            vim.fn["mkdp#util#install"]()
+        end,
+    })
 
-    use {"ggandor/leap.nvim", config = [[require("user.config.leap")]]}
+    use({ "ggandor/leap.nvim", config = [[require("user.config.leap")]] })
 
     -- NeOrg
-    use {
-    "~/GitHub/neorg/",
-    config = [[require("user.config.neorg")]],
-    requires = "nvim-lua/plenary.nvim"
+    use({
+        "~/GitHub/neo/neorg/",
+        config = [[require("user.config.neorg")]],
+        requires = "nvim-lua/plenary.nvim",
+    })
+
+use {
+    'kosayoda/nvim-lightbulb',
+        config = [[require('user.config.nvim-lightbulb')]],
+    requires = 'antoinemadec/FixCursorHold.nvim',
 }
 
     if PACKER_BOOTSTRAP then

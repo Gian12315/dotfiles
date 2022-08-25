@@ -1,5 +1,5 @@
 require("nvim-treesitter.configs").setup({
-    ensure_installed = { "c", "lua", "rust", "latex", "bash", "css", "java", "norg", "vim", "zig", "html" },
+    ensure_installed = { "c", "lua", "rust", "latex", "bash", "css", "java", "norg", "vim", "zig", "html", "sql" },
     highlight = { enable = true },
     incremental_selection = {
         enable = true,

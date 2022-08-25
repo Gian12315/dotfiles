@@ -4,9 +4,7 @@ require("neorg").setup({
         ["core.norg.dirman"] = {
             config = {
                 workspaces = {
-                    school = "~/Notes/School",
-                    work = "~/Notes/Work",
-                    test = "~/Notes/Test",
+                    notes = "~/Notes",
                 },
             },
         },
@@ -16,6 +14,7 @@ require("neorg").setup({
                 engine = "nvim-cmp",
             },
         },
+
 
         ["core.export"] = {},
 
@@ -30,7 +29,15 @@ require("neorg").setup({
         ["core.norg.journal"] = {
             config = {
                 journal_folder = "Journal",
+                strategy = "nested",
             },
+        },
+
+        ["core.gtd.base"] = {
+            config = {
+                workspace = "notes",
+                exclude = {"Journal/"}
+            }
         },
     },
 })

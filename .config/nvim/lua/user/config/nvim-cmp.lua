@@ -2,7 +2,7 @@ local cmp = require("cmp")
 local luasnip = require("luasnip")
 local lspkind = require("lspkind")
 
-local cmp_autopairs = require('nvim-autopairs.completion.cmp')
+local cmp_autopairs = require("nvim-autopairs.completion.cmp")
 
 require("luasnip.loaders.from_vscode").lazy_load()
 
@@ -60,7 +60,10 @@ cmp.setup({
         { name = "luasnip" },
         { name = "treesitter" },
         { name = "path" },
-    }, { { name = "neorg"}, { name = "buffer" }, { name = "calc" } }),
+        { name = "neorg" },
+        { name = "buffer" },
+        { name = "calc" },
+    }),
 
     formatting = {
         format = lspkind.cmp_format({
@@ -74,5 +77,5 @@ cmp.setup({
     },
 
     -- nvim-autopairs
-    cmp.event:on('confirm_done', cmp_autopairs.on_confirm_done()),
+    cmp.event:on("confirm_done", cmp_autopairs.on_confirm_done()),
 })
